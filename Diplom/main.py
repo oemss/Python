@@ -24,46 +24,40 @@ def split_txt():
     return split_text
 
 
+# Сравнение двух списков возвращает True, если 2ой "больше" первого
 def equal(lst1, lst2):
-    map(lambda x, y: x >= y, lst1, lst2)
+    print("lst1 = ", lst1)
+    print("lst2 = ", lst2)
+    if lst1 == []:
+        return False
+    else:
+        if lst1[0] < lst2[0]:
+            return True
+        else:
+            return equal(lst1[1:], lst2[1:])
 
 
 # Функция для получение статистики
 # lst - список который надо добавить
 # stat - существующая статистика
 def add2stat(lst, stat):
-    # ind_str = ",".join(map(lambda x: str(x), lst))
     temp_lst = []
+    print(stat)
     lst = list(map(lambda x: int(x), lst))
     if not stat:
-        stat = ([lst, 1])
+        stat = ([[lst, 1]])
         return stat
     for el in stat:
+        print("el = ", el)
         if el[0] == lst:
             temp_lst.append([el[0], el[1]+1])
         else:
-            if el[0][0] == lst[0] and el[0][1] > lst[1]:
+            if equal(el[0], lst):
                 temp_lst.append([lst, 1])
                 temp_lst.append(stat[stat.index(el):])
             else:
                 temp_lst.append(el)
     return temp_lst
-
-        # if temp == -1:
-        #     return stat
-        #     stat.append(ind_str + ":1")
-        # else:                                                                  # Старый кусок говна
-        #     stat.append(ind_str + ":" + str(int(el[el.find(":")+1:]) + 1))
-        #     stat.pop(temp)
-        #     return stat
-
-
-def combination(lst):
-    res = []
-    while lst:
-        res += [lst]
-        lst = lst[1:]
-    return res
 
 
 # Вариант для цепочек длины 2
