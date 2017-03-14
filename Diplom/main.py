@@ -26,8 +26,6 @@ def split_txt():
 
 # Сравнение двух списков возвращает True, если 2ой "больше" первого
 def equal(lst1, lst2):
-    print("lst1 = ", lst1)
-    print("lst2 = ", lst2)
     if lst1 == []:
         return False
     else:
@@ -42,20 +40,26 @@ def equal(lst1, lst2):
 # stat - существующая статистика
 def add2stat(lst, stat):
     temp_lst = []
-    print(stat)
     lst = list(map(lambda x: int(x), lst))
     if not stat:
-        stat = ([[lst, 1]])
-        return stat
+        temp_lst.append([lst, 1])
+        return temp_lst
     for el in stat:
-        print("el = ", el)
+        print("-------------------------")
+        print("stat = ", stat)
+        print("temp = ", temp_lst)
+        print("lst = ", lst)
+        print("el0 = ", el[0])
         if el[0] == lst:
+            print("1 add = ", [el[0], el[1]+1])
             temp_lst.append([el[0], el[1]+1])
         else:
             if equal(el[0], lst):
+                print("2 add = ", [lst, 1], el)
                 temp_lst.append([lst, 1])
-                temp_lst.append(stat[stat.index(el):])
+                temp_lst.append(el)
             else:
+                print("3 add = ", el)
                 temp_lst.append(el)
     return temp_lst
 
