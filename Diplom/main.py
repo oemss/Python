@@ -1,7 +1,34 @@
+import time
 result = 'result.txt'
 swap = 'swap.txt'
 input_text = 'input.txt'
 
+
+def buildlist(lst1, lst2):
+    if lst2:
+        return [lst1 + [lst2[0]]] + buildlist(lst1, lst2[1:])
+    else:
+        return []
+
+
+# i - длина последовательности
+def create_subseq(i, list, othList):
+    templist = []
+    if i - 1 == len(list):
+        return buildlist(list, othList)
+    else:
+        if len(othList)+len(list) == i:
+            return [list+othList]
+        else:
+            k = 0
+            while len(othList) >= k+i:
+                templist = templist + create_subseq(i, list + [othList[k]], othList[k+1:])
+                k += 1
+            return templist
+
+# def create_seq(i, seq):
+#
+#
 
 # Поиск элемента в списке
 def find_el(sp, sym):
@@ -21,7 +48,8 @@ def split_txt():
         file.close()
         if split_text[-1]:  # Удаляем лишний элемент если он есть
             split_text.remove([''])
-    split_text = list(map(lambda x: tuple(x), split_text))
+    split_text = list(map(lambda x: x, split_text))
+    print("sp= ",split_text)
     return split_text
 
 
@@ -76,8 +104,9 @@ def add2stat(lst, stat):
     if stat.get(lst) is None:
         stat[lst] = 1
     else:
-        stat[lst] = stat[lst]+1
+        stat[lst] = stat[lst] + 1
     return stat
+
 
 # Вариант для цепочек длины 2
 # Все варианты длины 2, идущие по порядку
@@ -95,10 +124,12 @@ def build_combination(lst):
 def get_result():
     res = {}
     for lst in split_txt():
-        temp = build_combination(lst)
+        temp = create_subseq(3,[],lst)
+        print(temp)
         for tplst in temp:
             res = add2stat(tuple(tplst), res).copy()
     return res
+
 
 # def build_collection(lst):
 
