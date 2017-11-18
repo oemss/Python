@@ -21,6 +21,37 @@ possw = {
     'PRCL' :  16,   # частица
     'INTJ' :  17    # междометие
 }
+symbol = {
+    '!'  : '.',
+    '.'  : '.',
+    ','  : '',
+    '?'  : '',
+    ';'  : '.',
+    ':'  : '',
+    '('  : '',
+    ')'  : '',
+    '['  : '',
+    ']'  : '',
+    '{'  : '',
+    '}'  : '',
+    '"'  : '',
+    '<'  : '',
+    '>'  : '',
+    '-'  : '',
+    '@'  : '',
+    '#'  : '',
+    '$'  : '',
+    '^'  : '',
+    '&'  : '',
+    '*'  : '',
+    '+'  : '',
+    '='  : '',
+    '~'  : '',
+    '/'  : '',
+    '\\' : '',
+    '|'  : '',
+    '\n' : ''
+}
 morph = pymorphy2.MorphAnalyzer()
 
 
@@ -33,11 +64,9 @@ def createposfile():
             temp += char
         else:
             if temp != '':
-                outfile.write(str(possw.get(morph.parse(temp)[0].tag.POS)))
-                print(morph.parse(temp))
                 outfile.write(' ')
+                outfile.write(str(possw.get(morph.parse(temp)[0].tag.POS)))
                 temp = ''
-            outfile.write(char)
+            if ord(char) > 57 & ord(char) < 48:
+                outfile.write(symbol.get(char, char))
 
-
-createposfile()
