@@ -2,6 +2,7 @@ import time
 result = 'result.txt'
 swap = 'swap.txt'
 input_text = 'input.txt'
+import pymorphy2
 
 
 def buildlist(lst1, lst2):
@@ -133,4 +134,6 @@ def get_result():
 
 # def build_collection(lst):
 
-print(get_result())
+# print(get_result
+morph = pymorphy2.MorphAnalyzer()
+print(morph.parse('стали'))
