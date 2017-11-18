@@ -5,6 +5,8 @@ input_text = 'input.txt'
 import pymorphy2
 
 
+
+
 def buildlist(lst1, lst2):
     if lst2:
         return [lst1 + [lst2[0]]] + buildlist(lst1, lst2[1:])
@@ -27,9 +29,6 @@ def create_subseq(i, list, othList):
                 k += 1
             return templist
 
-# def create_seq(i, seq):
-#
-#
 
 # Поиск элемента в списке
 def find_el(sp, sym):
@@ -54,54 +53,10 @@ def split_txt():
     return split_text
 
 
-# # Сравнение двух списков возвращает True, если 2ой "больше" первого
-# def equal(lst1, lst2):
-#     if not lst1:
-#         return False
-#     else:
-#         if lst1[0] < lst2[0]:
-#                 if lst1[1] < lst2[1]:
-#                     return True
-#                 else:
-#                     return False
-#         else:
-#             return equal(lst1[1:], lst2[1:])
-
-
-# def equal(lst1, lst2):
-#     if lst1[0] < lst2[0]:
-#         if lst1[1] < lst2[1]:
-#             return True
-#     return False
-
-
 # Функция для получение статистики
 # lst - список который надо добавить
 # stat - существующая статистика
 def add2stat(lst, stat):
-    # temp_lst = []
-    # # lst = list(map(lambda x: int(x), lst))
-    # if not stat:
-    #     temp_lst.append([lst, 1])
-    #     return temp_lst
-    # for el in stat:
-    #     print("-------------------------")
-    #     print("stat = ", stat)
-    #     print("temp = ", temp_lst)
-    #     print("lst = ", lst)
-    #     print("el0 = ", el[0])
-    #     if el[0] == lst:
-    #         print("1 add = ", [el[0], el[1]+1])
-    #         temp_lst.append([el[0], el[1]+1])
-    #     else:
-    #         # if equal(el[0], lst):
-    #         #     print("2 add = ", [lst, 1], el)
-    #         #     temp_lst.append([lst, 1])
-    #         #     temp_lst.append(el)
-    #         # else:
-    #         print("3 add = ", el)
-    #         temp_lst.append(el)
-    # return temp_lst
     if stat.get(lst) is None:
         stat[lst] = 1
     else:
@@ -132,8 +87,5 @@ def get_result():
     return res
 
 
-# def build_collection(lst):
-
 # print(get_result
-morph = pymorphy2.MorphAnalyzer()
-print(morph.parse('стали'))
+
