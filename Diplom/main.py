@@ -1,7 +1,8 @@
 import buildpos
 import plot
 from collections import OrderedDict
-
+import sys
+sys.setrecursionlimit(10000)
 
 result = 'result.txt'
 swap = 'swap.txt'
@@ -124,17 +125,17 @@ def add2stat(lst, stat):
 def get_result():
     res = {}
     for lst in split_txt():
-        lst = list(map(lambda x: int(x),lst))
-        temp = create_subseq(3, [], lst)
-        # temp = blistinarow(3, 1, lst)
+        # lst = list(map(lambda x: int(x),lst))
+        # temp = create_subseq(3, [], lst)
+        temp = blistinarow(2, 1, lst)
         # temp = sortlist(temp)
         for tplst in temp:
             res = add2stat(tuple(tplst), res).copy()
+    print(res)
     return res
 
 
 
 buildpos.createposfile()
-ress = OrderedDict(sorted(get_result().items(), key = lambda t: t[1]))
-
-plot.plotbar(ress.values(), ress.keys())
+# ress = OrderedDict(sorted(get_result().items(), key = lambda t: t[1]))
+plot.createplot(get_result(), 2)

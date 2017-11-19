@@ -19,7 +19,8 @@ possw = {
     'PREP' :  14,   # предлог
     'CONJ' :  15,   # союз
     'PRCL' :  16,   # частица
-    'INTJ' :  17    # междометие
+    'INTJ' :  17,    # междометие
+     None  :  18
 }
 symbol = {
     '!'  : '.',
@@ -68,7 +69,6 @@ def createposfile():
     infile = open(input_text, 'r')
     outfile = open(output_file, 'w')
     for char in infile.read():
-        print(char, symbol.get(char, char))
         if char.isalpha():
             temp += char
         else:
@@ -77,5 +77,5 @@ def createposfile():
                 outfile.write(str(possw.get(morph.parse(temp)[0].tag.POS)))
                 temp = ''
             if ord(char) > 57 & ord(char) < 48:
-                outfile.write(symbol.get(char, char))
+                outfile.write(symbol.get(char, ''))
 
