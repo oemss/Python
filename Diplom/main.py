@@ -1,5 +1,7 @@
 import buildpos
 import plot
+from collections import OrderedDict
+
 
 result = 'result.txt'
 swap = 'swap.txt'
@@ -13,6 +15,9 @@ def eqlst(lst1, lst2):
     while k < len(lst1):
         if lst1[k] < lst2[k]:
             return 0
+        else:
+            if lst1[k] > lst2[k]:
+                return 2
         k += 1
     return 2
 
@@ -40,7 +45,7 @@ def sortlist(list):
         i += 1
     return temp1
 
-print("XUYYYY = ",sortlist([[10, 1, 14], [1, 14, 1], [14, 1, 5]]))
+
 def blistinarow(i, step, list):
     res = []
     j = 0
@@ -69,7 +74,6 @@ def buildlist(lst1, lst2):
 
 # i - длина последовательности
 def create_subseq(i, list, othList):
-    print(othList)
     templist = []
     if i - 1 == len(list):
         return buildlist(list, othList)
@@ -121,11 +125,9 @@ def get_result():
     res = {}
     for lst in split_txt():
         lst = list(map(lambda x: int(x),lst))
-        # temp = create_subseq(3, [], lst)
-        temp = blistinarow(3, 1, lst)
-        print("1 = ",temp)
-        temp = sortlist(temp)
-        print("2 = ", temp)
+        temp = create_subseq(3, [], lst)
+        # temp = blistinarow(3, 1, lst)
+        # temp = sortlist(temp)
         for tplst in temp:
             res = add2stat(tuple(tplst), res).copy()
     return res
@@ -133,6 +135,6 @@ def get_result():
 
 
 buildpos.createposfile()
-ress = get_result()
-print("12312", ress)
-# plot.plotbar(ress.values(), ress.keys())
+ress = OrderedDict(sorted(get_result().items(), key = lambda t: t[1]))
+
+plot.plotbar(ress.values(), ress.keys())
