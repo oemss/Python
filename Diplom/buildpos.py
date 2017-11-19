@@ -50,7 +50,15 @@ symbol = {
     '/'  : '',
     '\\' : '',
     '|'  : '',
-    '\n' : ''
+    '\n' : '',
+    '«'  : '',
+    '»'  : '',
+    '—' : '',
+    '–'  : '',
+    None : '',
+    '…'  : '',
+    '“'  : '',
+    '”'  : ''
 }
 morph = pymorphy2.MorphAnalyzer()
 
@@ -60,6 +68,7 @@ def createposfile():
     infile = open(input_text, 'r')
     outfile = open(output_file, 'w')
     for char in infile.read():
+        print(char, symbol.get(char, char))
         if char.isalpha():
             temp += char
         else:
